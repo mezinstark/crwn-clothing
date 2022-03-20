@@ -2,11 +2,12 @@ import { async } from '@firebase/util';
 import {initializeApp} from 'firebase/app';
 import {
     getAuth,
-    //signInWithRedirect,
+    signInWithRedirect,
     signInWithPopup,
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    signOut
 } from 'firebase/auth'
 
 import {
@@ -29,7 +30,7 @@ const firebaseConfig = {
 
   const googleProvider = new GoogleAuthProvider();
 
-  provider.setCustomParameters({
+  googleProvider.setCustomParameters({
       prompt: "select_account"
   });
 
@@ -83,3 +84,5 @@ const firebaseConfig = {
   
     return await signInWithEmailAndPassword(auth, email, password);
   };
+
+  export const signOutUser = async()=> await signOut(auth);
